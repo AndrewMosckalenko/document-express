@@ -5,14 +5,16 @@ import { userRouter, documentRouter } from "./routes";
 import { createPgPool } from "./db/postgres";
 
 const app = express();
-dotenv.config();
-createPgPool();
-
 const port = Number(process.env.BACKEND_PORT) || 5000;
 
 app.use("/api/user", userRouter);
 app.use("/api/document", documentRouter);
 
-app.listen(port, () => {
-  console.log("http://localhost:5000");
-});
+dotenv.config();
+
+(async () => {
+  await createPgPool();
+  app.listen(port, () => {
+    console.log("http://localhost:5000");
+  });
+})();

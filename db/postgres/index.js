@@ -3,7 +3,7 @@ import { Document, Paragraph, Tag, User } from "../../entities";
 
 let pgPool;
 
-const createPgPool = () => {
+const createPgPool = async () => {
   pgPool = new DataSource({
     type: "postgres",
     host: process.env.POSTGRES_DB_HOST,
@@ -16,7 +16,7 @@ const createPgPool = () => {
     synchronize: true,
   });
 
-  pgPool
+  await pgPool
     .initialize()
     .then(() => {
       console.log("Data Source has been initialized!");
