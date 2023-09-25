@@ -10,7 +10,6 @@ userRouter.get("/whoami", (req, res) => {
 });
 
 userRouter.post("/sign-in", (req, res) => {
-  console.log(req.body);
   authService
     .signIn(req.body)
     .then((result) => {

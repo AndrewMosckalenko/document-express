@@ -20,6 +20,7 @@ export const User = new EntitySchema({
       nullable: false,
       default: "untitled",
       type: "text",
+      unique: true,
     },
     password: {
       type: "text",
