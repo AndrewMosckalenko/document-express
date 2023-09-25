@@ -1,5 +1,8 @@
 import { Router } from "express";
 
+import { userService, authService } from "../services";
+import { errorHandler } from "../utils";
+
 const userRouter = Router();
 
 userRouter.get("/whoami", (req, res) => {
@@ -7,11 +10,22 @@ userRouter.get("/whoami", (req, res) => {
 });
 
 userRouter.post("/sign-in", (req, res) => {
-  res.send(1);
+  console.log(req.body);
+  authService
+    .signIn(req.body)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => errorHandler(res, error));
 });
 
 userRouter.post("/sign-up", (req, res) => {
-  res.send(1);
+  authService
+    .signUp(req.body)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => errorHandler(res, error));
 });
 
 export { userRouter };

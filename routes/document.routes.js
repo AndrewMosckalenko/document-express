@@ -14,7 +14,7 @@ documentRouter.post("", (req, res) => {
     .then((result) => {
       res.status(200).send(result);
     })
-    .catch(errorHandler);
+    .catch((error) => errorHandler(res, error));
 });
 
 documentRouter.post("/:id", (req, res) => {
@@ -23,7 +23,7 @@ documentRouter.post("/:id", (req, res) => {
     .then((result) => {
       res.status(200).send(result);
     })
-    .catch(errorHandler);
+    .catch((error) => errorHandler(res, error));
 });
 
 documentRouter.post("/:id/tag", (req, res) => {
@@ -32,7 +32,7 @@ documentRouter.post("/:id/tag", (req, res) => {
     .then((result) => {
       res.status(200).send(result);
     })
-    .catch(errorHandler);
+    .catch((error) => errorHandler(res, error));
 });
 
 // #################################################################
@@ -45,7 +45,7 @@ documentRouter.get("", (_, res) => {
     .then((result) => {
       res.status(200).send(result);
     })
-    .catch(errorHandler);
+    .catch((error) => errorHandler(res, error));
 });
 
 documentRouter.get("/:id", (req, res) => {
@@ -54,7 +54,7 @@ documentRouter.get("/:id", (req, res) => {
     .then((result) => {
       res.status(200).send(result);
     })
-    .catch(errorHandler);
+    .catch((error) => errorHandler(res, error));
 });
 documentRouter.get("/:id/paragraphs", (req, res) => {});
 
@@ -68,7 +68,7 @@ documentRouter.patch("/:id", (req, res) => {
     .then((result) => {
       res.status(200).send(result);
     })
-    .catch(errorHandler);
+    .catch((error) => errorHandler(res, error));
 });
 
 documentRouter.patch("/paragraph/:id", (req, res) => {
@@ -77,7 +77,7 @@ documentRouter.patch("/paragraph/:id", (req, res) => {
     .then((result) => {
       res.status(200).send(result);
     })
-    .catch(errorHandler);
+    .catch((error) => errorHandler(res, error));
 });
 
 // #################################################################
@@ -90,7 +90,7 @@ documentRouter.delete("/:id", (req, res) => {
     .then((result) => {
       res.status(200).send(result);
     })
-    .catch(errorHandler);
+    .catch((error) => errorHandler(res, error));
 });
 
 documentRouter.delete("/paragraph/:id", (req, res) => {
@@ -99,7 +99,7 @@ documentRouter.delete("/paragraph/:id", (req, res) => {
     .then((result) => {
       res.status(200).send(result);
     })
-    .catch(errorHandler);
+    .catch((error) => errorHandler(res, error));
 });
 
 documentRouter.delete("/:id/tag", (req, res) => {
@@ -108,7 +108,7 @@ documentRouter.delete("/:id/tag", (req, res) => {
     .then((result) => {
       res.status(200).send(result);
     })
-    .catch(errorHandler);
+    .catch((error) => errorHandler(res, error));
 });
 
 export { documentRouter };
