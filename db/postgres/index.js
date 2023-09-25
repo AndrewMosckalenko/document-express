@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm"
+import { Document, Paragraph, Tag, User } from "../../entities"
 
 let pgPool
 
@@ -10,7 +11,7 @@ const createPgPool = () => {
         username: process.env.POSTGRES_DB_USER,
         password: process.env.POSTGRES_DB_PASS,
         database: process.env.POSTGRES_DB_NAME,
-        entities: ["src/entity/*.js"],
+        entities: [User, Document, Paragraph, Tag],
         logging: true,
         synchronize: true,
     })
