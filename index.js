@@ -1,9 +1,14 @@
 import express from "express";
-import { userRouter, documentRouter } from "./routes/index";
+import dotenv from 'dotenv'
+
+import { userRouter, documentRouter } from "./routes";
+import { createPgPool } from "./db/postgres";
 
 const app = express();
+dotenv.config();
+createPgPool();
 
-const port = 5000;
+const port = Number(process.env.BACKEND_PORT) || 5000;
 
 app.use("/api/user", userRouter);
 app.use("/api/document", documentRouter);
