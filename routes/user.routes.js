@@ -1,12 +1,13 @@
 import { Router } from "express";
 
-import { userService, authService } from "../services";
+import { authService } from "../services";
 import { errorHandler } from "../utils";
+import { authMiddleware } from "../middlewares/auth.middlewares";
 
 const userRouter = Router();
 
-userRouter.get("/whoami", (req, res) => {
-  res.send("sdfsdf");
+userRouter.get("/whoami", authMiddleware, (req, res) => {
+  res.status(200).send(req.user);
 });
 
 userRouter.post("/sign-in", (req, res) => {
