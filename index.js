@@ -1,5 +1,5 @@
 import express from "express";
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 
 import { userRouter, documentRouter } from "./routes";
 import { createPgPool } from "./db/postgres";

@@ -1,37 +1,35 @@
 import { EntitySchema } from "typeorm";
 
-
-
 export const Paragraph = new EntitySchema({
-    name: 'paragraphs',
-    tableName: 'paragraphs',
-    columns: {
-        id: {
-            primary: true,
-            type: 'int',
-            generated: true,
-        },
-        name: {
-            type: 'text',
-            nullable: false,
-            default: 'untitled',
-            type: 'text',
-        },
-        content: {
-            type: 'text',
-            nullable: false,
-            default: 'untitled',
-            type: 'text',
-        }
+  name: "paragraphs",
+  tableName: "paragraphs",
+  columns: {
+    id: {
+      primary: true,
+      type: "int",
+      generated: true,
     },
-    relations: {
-        document: {
-            target: 'documents',
-            type: 'many-to-one',
-        },
-        tags: {
-            target: 'tags',
-            type: 'one-to-many',
-        }
-    }
-})
+    name: {
+      type: "text",
+      nullable: false,
+      default: "untitled",
+      type: "text",
+    },
+    content: {
+      type: "text",
+      nullable: false,
+      default: "untitled",
+      type: "text",
+    },
+  },
+  relations: {
+    document: {
+      target: "documents",
+      type: "many-to-one",
+    },
+    tags: {
+      target: "tags",
+      type: "one-to-many",
+    },
+  },
+});
