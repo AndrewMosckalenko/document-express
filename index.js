@@ -5,7 +5,7 @@ import cors from "cors";
 
 import { userRouter, documentRouter } from "./routes";
 import { createPgPool } from "./db/postgres";
-import { authMiddleware } from "./middlewares/auth.middlewares";
+import { authMiddleware } from "./middlewares";
 
 const app = express();
 const port = Number(process.env.BACKEND_PORT) || 5000;
