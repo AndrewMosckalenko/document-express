@@ -1,4 +1,4 @@
-import { userRouterDescriptor } from "./routes";
+import { userRouterDescriptor, documentRouterDescriptor } from "./routes";
 
 export const swaggerDocs = {
   openapi: "3.0.0",
@@ -15,5 +15,6 @@ export const swaggerDocs = {
   ],
   paths: {
     ...userRouterDescriptor,
+    ...documentRouterDescriptor,
   },
 };
