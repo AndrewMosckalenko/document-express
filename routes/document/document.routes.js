@@ -35,6 +35,15 @@ documentRouter.post("/:id/tag", (req, res) => {
     .catch((error) => errorHandler(res, error));
 });
 
+documentRouter.post("/:id/copy", (req, res) => {
+  documentService
+    .copyDocument(req.params["id"])
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => errorHandler(res, error));
+});
+
 // #################################################################
 // get handlers
 // #################################################################

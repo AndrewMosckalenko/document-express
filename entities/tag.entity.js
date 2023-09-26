@@ -20,7 +20,7 @@ export const Tag = new EntitySchema({
     paragraph: {
       target: "paragraphs",
       type: "many-to-one",
-      onDelete: 'CASCADE', 
+      onDelete: "CASCADE",
       joinColumn: {
         name: "paragraph_id",
       },

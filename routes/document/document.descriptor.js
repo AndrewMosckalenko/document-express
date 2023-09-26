@@ -7,6 +7,29 @@ import {
 } from "./document.schemas";
 
 export const documentRouterDescriptor = {
+  "/api/document/:id/copy": {
+    post: {
+      tags: ["document"],
+      security: {
+        bearerAuth: [],
+      },
+      description: "Create new document",
+      parameters: [
+        {
+          name: "id",
+          in: "path",
+        },
+      ],
+      responses: {
+        200: {
+          description: "Done",
+        },
+        default: {
+          description: "Error message",
+        },
+      },
+    },
+  },
   "/api/document": {
     post: {
       tags: ["document"],
@@ -21,6 +44,14 @@ export const documentRouterDescriptor = {
           },
         },
       },
+      responses: {
+        200: {
+          description: "Done",
+        },
+        default: {
+          description: "Error message",
+        },
+      },
     },
     get: {
       security: {
@@ -28,6 +59,14 @@ export const documentRouterDescriptor = {
       },
       tags: ["document"],
       description: "Read all documents",
+      responses: {
+        200: {
+          description: "Done",
+        },
+        default: {
+          description: "Error message",
+        },
+      },
     },
   },
   "/api/document/{:id}": {
@@ -50,6 +89,14 @@ export const documentRouterDescriptor = {
           },
         },
       },
+      responses: {
+        200: {
+          description: "Done",
+        },
+        default: {
+          description: "Error message",
+        },
+      },
     },
     get: {
       security: {
@@ -63,6 +110,14 @@ export const documentRouterDescriptor = {
           in: "path",
         },
       ],
+      responses: {
+        200: {
+          description: "Done",
+        },
+        default: {
+          description: "Error message",
+        },
+      },
     },
     patch: {
       security: {
@@ -70,6 +125,14 @@ export const documentRouterDescriptor = {
       },
       tags: ["document"],
       description: "Update document",
+      responses: {
+        200: {
+          description: "Done",
+        },
+        default: {
+          description: "Error message",
+        },
+      },
       parameters: [
         {
           name: "id",
@@ -88,6 +151,14 @@ export const documentRouterDescriptor = {
       security: {
         bearerAuth: [],
       },
+      responses: {
+        200: {
+          description: "Done",
+        },
+        default: {
+          description: "Error message",
+        },
+      },
       tags: ["document"],
       parameters: [
         {
@@ -104,6 +175,14 @@ export const documentRouterDescriptor = {
       },
       tags: ["paragraph"],
       description: "Update paragraph",
+      responses: {
+        200: {
+          description: "Done",
+        },
+        default: {
+          description: "Error message",
+        },
+      },
       parameters: [
         {
           name: "id",
@@ -123,6 +202,14 @@ export const documentRouterDescriptor = {
         bearerAuth: [],
       },
       tags: ["paragraph"],
+      responses: {
+        200: {
+          description: "Done",
+        },
+        default: {
+          description: "Error message",
+        },
+      },
       parameters: [
         {
           name: "id",
@@ -137,6 +224,14 @@ export const documentRouterDescriptor = {
         bearerAuth: [],
       },
       tags: ["tag"],
+      responses: {
+        200: {
+          description: "Done",
+        },
+        default: {
+          description: "Error message",
+        },
+      },
       description: "Create new tag",
       parameters: [
         {
@@ -155,6 +250,14 @@ export const documentRouterDescriptor = {
     delete: {
       security: {
         bearerAuth: [],
+      },
+      responses: {
+        200: {
+          description: "Done",
+        },
+        default: {
+          description: "Error message",
+        },
       },
       tags: ["tag"],
       parameters: [

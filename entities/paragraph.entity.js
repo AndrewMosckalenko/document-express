@@ -26,7 +26,7 @@ export const Paragraph = new EntitySchema({
     document: {
       target: "documents",
       type: "many-to-one",
-      onDelete: 'CASCADE', 
+      onDelete: "CASCADE",
       joinColumn: {
         name: "document_id",
       },

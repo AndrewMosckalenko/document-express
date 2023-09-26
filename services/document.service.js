@@ -1,6 +1,7 @@
 import { pgPool } from "../db/postgres";
-import { Document } from "../entities";
+import { Document, Paragraph } from "../entities";
 import { HttpExceprtion } from "../errors";
+import { paragraphService } from "./paragraph.service";
 
 export const documentService = {
   getDocuments() {
@@ -48,7 +49,33 @@ export const documentService = {
 
   updateDocument(updateDocument) {
     try {
-      return pgPool.getRepository(Document).update({ id: updateDocument.id }, updateDocument);
+      return pgPool
+        .getRepository(Document)
+        .update({ id: updateDocument.id }, updateDocument);
+    } catch (e) {
+      throw new HttpExceprtion(e.message, 400);
+    }
+  },
+
+  async copyDocument(id) {
+    try {
+      const originDocument = await this.getDocumentWithParagraphsById(id);
+
+      const newDocument = await this.createDocument({
+        ...originDocument,
+        name: originDocument.name + "-copy",
+      });
+      const newDocumentId = newDocument.raw[0].id;
+
+      const createParargraphPromises = originDocument.paragraphs.map(
+        (paragraph) =>
+          paragraphService.copyParagraph({
+            ...paragraph,
+            document: { id: newDocumentId },
+          }),
+      );
+
+      return Promise.all(createParargraphPromises);
     } catch (e) {
       throw new HttpExceprtion(e.message, 400);
     }
