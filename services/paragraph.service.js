@@ -4,50 +4,30 @@ import { tagService } from "./tag.service";
 
 export const paragraphService = {
   getParagraph(id) {
-    try {
-      return pgPool.getRepository(Paragraph).findOneBy({ id });
-    } catch (e) {
-      throw new HttpException(e.message, 400);
-    }
+    return pgPool.getRepository(Paragraph).findOneBy({ id });
   },
 
   createParagraph(newParagraph) {
-    try {
-      return pgPool.getRepository(Paragraph).insert(newParagraph);
-    } catch (e) {
-      throw new HttpException(e.message, 400);
-    }
+    return pgPool.getRepository(Paragraph).insert(newParagraph);
   },
 
   async copyParagraph(originParagraph) {
-    try {
-      const newParagraph = await this.createParagraph(originParagraph);
-      const newParagraphId = newParagraph.raw[0].id;
-      const createTagPromises = originParagraph.tags.map((tag) =>
-        tagService.createTag({ ...tag, paragraph: { id: newParagraphId } }),
-      );
+    const newParagraph = await this.createParagraph(originParagraph);
+    const newParagraphId = newParagraph.raw[0].id;
+    const createTagPromises = originParagraph.tags.map((tag) =>
+      tagService.createTag({ ...tag, paragraph: { id: newParagraphId } }),
+    );
 
-      return Promise.all(createTagPromises);
-    } catch (e) {
-      throw new HttpException(e.message, 400);
-    }
+    return Promise.all(createTagPromises);
   },
 
   updateParagraph(updatedParargraph) {
-    try {
-      return pgPool
-        .getRepository(Paragraph)
-        .update({ id: updatedParargraph.id }, updatedParargraph);
-    } catch (e) {
-      throw new HttpException(e.message, 400);
-    }
+    return pgPool
+      .getRepository(Paragraph)
+      .update({ id: updatedParargraph.id }, updatedParargraph);
   },
 
   deleteParagraph(id) {
-    try {
-      return pgPool.getRepository(Paragraph).delete({ id });
-    } catch (e) {
-      throw new HttpException(e.message, 400);
-    }
+    return pgPool.getRepository(Paragraph).delete({ id });
   },
 };

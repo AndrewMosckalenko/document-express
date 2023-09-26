@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { documentService, paragraphService, tagService } from "../../services";
 import { errorHandler } from "../../utils";
-import { TxtFileCheckerMiddleware } from "../../middlewares";
+import { txtFileCheckerMiddleware } from "../../middlewares";
 
 const documentRouter = Router();
 
@@ -9,13 +9,10 @@ const documentRouter = Router();
 // post - handlers
 // #################################################################
 
-documentRouter.post("", TxtFileCheckerMiddleware, (req, res) => {
-  documentService
-    .createDocument(req.body, req.files.file)
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+documentRouter.post("", txtFileCheckerMiddleware, (req, res) => {
+  documentService.createDocument(req.body, req.files.file).then((result) => {
+    res.status(200).send(result);
+  });
 });
 
 documentRouter.post("/:id", (req, res) => {
@@ -23,8 +20,7 @@ documentRouter.post("/:id", (req, res) => {
     .createParagraph({ ...req.body, document: { id: req.params["id"] } })
     .then((result) => {
       res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+    });
 });
 
 documentRouter.post("/:id/tag", (req, res) => {
@@ -32,17 +28,13 @@ documentRouter.post("/:id/tag", (req, res) => {
     .createTag({ ...req.body, paragraph: { id: req.params["id"] } })
     .then((result) => {
       res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+    });
 });
 
 documentRouter.post("/:id/copy", (req, res) => {
-  documentService
-    .copyDocument(req.params["id"])
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+  documentService.copyDocument(req.params["id"]).then((result) => {
+    res.status(200).send(result);
+  });
 });
 
 // #################################################################
@@ -50,21 +42,15 @@ documentRouter.post("/:id/copy", (req, res) => {
 // #################################################################
 
 documentRouter.get("", (_, res) => {
-  documentService
-    .getDocuments()
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+  documentService.getDocuments().then((result) => {
+    res.status(200).send(result);
+  });
 });
 
 documentRouter.get("/:id", (req, res) => {
-  documentService
-    .getDocumentById(req.params["id"])
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+  documentService.getDocumentById(req.params["id"]).then((result) => {
+    res.status(200).send(result);
+  });
 });
 
 documentRouter.get("/:id/paragraphs", (req, res) => {
@@ -72,8 +58,7 @@ documentRouter.get("/:id/paragraphs", (req, res) => {
     .getDocumentWithParagraphsById(req.params["id"])
     .then((result) => {
       res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+    });
 });
 
 // #################################################################
@@ -85,8 +70,7 @@ documentRouter.patch("/:id", (req, res) => {
     .updateDocument({ ...req.body, id: req.params["id"] })
     .then((result) => {
       res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+    });
 });
 
 documentRouter.patch("/paragraph/:id", (req, res) => {
@@ -94,8 +78,7 @@ documentRouter.patch("/paragraph/:id", (req, res) => {
     .updateParagraph({ ...req.body, id: req.params["id"] })
     .then((result) => {
       res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+    });
 });
 
 // #################################################################
@@ -112,21 +95,15 @@ documentRouter.delete("/:id", (req, res) => {
 });
 
 documentRouter.delete("/paragraph/:id", (req, res) => {
-  paragraphService
-    .deleteParagraph(req.params["id"])
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+  paragraphService.deleteParagraph(req.params["id"]).then((result) => {
+    res.status(200).send(result);
+  });
 });
 
 documentRouter.delete("/:id/tag", (req, res) => {
-  tagService
-    .deleteTag(req.params["id"])
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+  tagService.deleteTag(req.params["id"]).then((result) => {
+    res.status(200).send(result);
+  });
 });
 
 export { documentRouter };

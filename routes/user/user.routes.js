@@ -11,21 +11,15 @@ userRouter.get("/whoami", authMiddleware, (req, res) => {
 });
 
 userRouter.post("/sign-in", (req, res) => {
-  authService
-    .signIn(req.body)
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+  authService.signIn(req.body).then((result) => {
+    res.status(200).send(result);
+  });
 });
 
 userRouter.post("/sign-up", (req, res) => {
-  authService
-    .signUp(req.body)
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((error) => errorHandler(res, error));
+  authService.signUp(req.body).then((result) => {
+    res.status(200).send(result);
+  });
 });
 
 export { userRouter };
