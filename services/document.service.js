@@ -48,7 +48,7 @@ export const documentService = {
 
   updateDocument(updateDocument) {
     try {
-      return pgPool.getRepository(Document).update({ id }, updateDocument);
+      return pgPool.getRepository(Document).update({ id: updateDocument.id }, updateDocument);
     } catch (e) {
       throw new HttpExceprtion(e.message, 400);
     }
