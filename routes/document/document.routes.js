@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { documentService, paragraphService, tagService } from "../../services";
-import { errorHandler } from "../../utils";
 import { txtFileCheckerMiddleware } from "../../middlewares";
 
 const documentRouter = Router();
