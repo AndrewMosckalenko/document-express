@@ -19,6 +19,17 @@ export const documentService = {
     }
   },
 
+  getDocumentWithParagraphsById(id) {
+    try {
+      return pgPool.getRepository(Document).findOne({
+        relations: ["paragraphs", "paragraphs.tags"],
+        where: { id },
+      });
+    } catch (e) {
+      throw new HttpExceprtion(e.message, 400);
+    }
+  },
+
   createDocument(newDocument) {
     try {
       return pgPool.getRepository(Document).insert(newDocument);

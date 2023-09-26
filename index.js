@@ -11,13 +11,15 @@ import { swaggerDocs } from "./api-doc";
 
 const app = express();
 const port = Number(process.env.BACKEND_PORT) || 5000;
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use("/doc", swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerDocs));
 
-app.use("/api/user", urlencodedParser, userRouter);
-app.use("/api/document", urlencodedParser, authMiddleware, documentRouter);
+app.use("/api/user", userRouter);
+app.use("/api/document", authMiddleware, documentRouter);
 
 dotenv.config();
 

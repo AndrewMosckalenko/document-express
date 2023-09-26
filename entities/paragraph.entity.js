@@ -26,10 +26,14 @@ export const Paragraph = new EntitySchema({
     document: {
       target: "documents",
       type: "many-to-one",
+      joinColumn: {
+        name: "document_id",
+      },
     },
     tags: {
       target: "tags",
       type: "one-to-many",
+      inverseSide: "paragraph",
     },
   },
 });

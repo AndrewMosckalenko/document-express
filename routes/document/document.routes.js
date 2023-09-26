@@ -56,7 +56,15 @@ documentRouter.get("/:id", (req, res) => {
     })
     .catch((error) => errorHandler(res, error));
 });
-documentRouter.get("/:id/paragraphs", (req, res) => {});
+
+documentRouter.get("/:id/paragraphs", (req, res) => {
+  documentService
+    .getDocumentWithParagraphsById(req.params["id"])
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => errorHandler(res, error));
+});
 
 // #################################################################
 // patch handlers

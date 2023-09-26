@@ -17,4 +17,13 @@ export const swaggerDocs = {
     ...userRouterDescriptor,
     ...documentRouterDescriptor,
   },
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+      },
+    },
+  },
 };

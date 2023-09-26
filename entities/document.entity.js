@@ -20,6 +20,7 @@ export const Document = new EntitySchema({
     paragraphs: {
       target: "paragraphs",
       type: "one-to-many",
+      inverseSide: "document",
     },
   },
 });

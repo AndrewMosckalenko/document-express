@@ -7,23 +7,35 @@ import {
 } from "./document.schemas";
 
 export const documentRouterDescriptor = {
-  "/document": {
+  "/api/document": {
     post: {
+      tags: ["document"],
+      security: {
+        bearerAuth: [],
+      },
       description: "Create new document",
       requestBody: {
         content: {
-          "application/json": {
+          "application/x-www-form-urlencoded": {
             schema: { ...createDocumentSchema },
           },
         },
       },
     },
     get: {
+      security: {
+        bearerAuth: [],
+      },
+      tags: ["document"],
       description: "Read all documents",
     },
   },
-  "/document/{:id}": {
+  "/api/document/{:id}": {
     post: {
+      security: {
+        bearerAuth: [],
+      },
+      tags: ["paragraph"],
       description: "Create new paragraph",
       parameters: [
         {
@@ -33,13 +45,17 @@ export const documentRouterDescriptor = {
       ],
       requestBody: {
         content: {
-          "application/json": {
+          "application/x-www-form-urlencoded": {
             schema: { ...createParagraphSchema },
           },
         },
       },
     },
     get: {
+      security: {
+        bearerAuth: [],
+      },
+      tags: ["document"],
       description: "Get document by id",
       parameters: [
         {
@@ -49,6 +65,10 @@ export const documentRouterDescriptor = {
       ],
     },
     patch: {
+      security: {
+        bearerAuth: [],
+      },
+      tags: ["document"],
       description: "Update document",
       parameters: [
         {
@@ -58,13 +78,17 @@ export const documentRouterDescriptor = {
       ],
       requestBody: {
         content: {
-          "application/json": {
+          "application/x-www-form-urlencoded": {
             schema: { ...patchDocumentSchema },
           },
         },
       },
     },
     delete: {
+      security: {
+        bearerAuth: [],
+      },
+      tags: ["document"],
       parameters: [
         {
           name: "id",
@@ -73,8 +97,12 @@ export const documentRouterDescriptor = {
       ],
     },
   },
-  "/document/paragraph/{:id}": {
+  "/api/document/paragraph/{:id}": {
     patch: {
+      security: {
+        bearerAuth: [],
+      },
+      tags: ["paragraph"],
       description: "Update paragraph",
       parameters: [
         {
@@ -84,13 +112,17 @@ export const documentRouterDescriptor = {
       ],
       requestBody: {
         content: {
-          "application/json": {
+          "application/x-www-form-urlencoded": {
             schema: { ...patchParagraphSchema },
           },
         },
       },
     },
     delete: {
+      security: {
+        bearerAuth: [],
+      },
+      tags: ["paragraph"],
       parameters: [
         {
           name: "id",
@@ -99,8 +131,12 @@ export const documentRouterDescriptor = {
       ],
     },
   },
-  "/document/{:id}/tag": {
+  "/api/document/{:id}/tag": {
     post: {
+      security: {
+        bearerAuth: [],
+      },
+      tags: ["tag"],
       description: "Create new tag",
       parameters: [
         {
@@ -110,13 +146,17 @@ export const documentRouterDescriptor = {
       ],
       requestBody: {
         content: {
-          "application/json": {
+          "application/x-www-form-urlencoded": {
             schema: { ...createTagSchema },
           },
         },
       },
     },
     delete: {
+      security: {
+        bearerAuth: [],
+      },
+      tags: ["tag"],
       parameters: [
         {
           name: "id",

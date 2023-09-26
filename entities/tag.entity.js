@@ -16,10 +16,13 @@ export const Tag = new EntitySchema({
       type: "text",
     },
   },
-  rrelations: {
+  relations: {
     paragraph: {
       target: "paragraphs",
-      type: "manu-to-one",
+      type: "many-to-one",
+      joinColumn: {
+        name: "paragraph_id",
+      },
     },
   },
 });
