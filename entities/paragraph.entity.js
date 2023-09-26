@@ -9,6 +9,11 @@ export const Paragraph = new EntitySchema({
       type: "int",
       generated: true,
     },
+    serial: {
+      type: "int",
+      nullable: false,
+      default: 0,
+    },
     name: {
       type: "text",
       nullable: false,

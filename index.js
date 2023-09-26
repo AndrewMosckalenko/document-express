@@ -8,6 +8,7 @@ import { userRouter, documentRouter } from "./routes";
 import { createPgPool } from "./db/postgres";
 import { authMiddleware } from "./middlewares";
 import { swaggerDocs } from "./api-doc";
+import fileUpload from "express-fileupload";
 
 const app = express();
 const port = Number(process.env.BACKEND_PORT) || 5000;
@@ -15,6 +16,7 @@ const port = Number(process.env.BACKEND_PORT) || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 app.use("/doc", swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerDocs));
 

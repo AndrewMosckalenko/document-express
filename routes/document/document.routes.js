@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { documentService, paragraphService, tagService } from "../../services";
 import { errorHandler } from "../../utils";
+import { TxtFileCheckerMiddleware } from "../../middlewares";
 
 const documentRouter = Router();
 
@@ -8,9 +9,9 @@ const documentRouter = Router();
 // post - handlers
 // #################################################################
 
-documentRouter.post("", (req, res) => {
+documentRouter.post("", TxtFileCheckerMiddleware, (req, res) => {
   documentService
-    .createDocument(req.body)
+    .createDocument(req.body, req.files.file)
     .then((result) => {
       res.status(200).send(result);
     })

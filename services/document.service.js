@@ -20,20 +20,42 @@ export const documentService = {
     }
   },
 
-  getDocumentWithParagraphsById(id) {
+  async getDocumentWithParagraphsById(id) {
     try {
-      return pgPool.getRepository(Document).findOne({
+      const document = await pgPool.getRepository(Document).findOne({
         relations: ["paragraphs", "paragraphs.tags"],
         where: { id },
       });
+
+      document.paragraphs.sort((paragraph1, paragraph2) =>
+        paragraph1.serial > paragraph2.serial ? 1 : -1,
+      );
+      return document;
     } catch (e) {
       throw new HttpExceprtion(e.message, 400);
     }
   },
 
-  createDocument(newDocument) {
+  async createDocument(newDocument, file) {
     try {
-      return pgPool.getRepository(Document).insert(newDocument);
+      const createdDocument = await pgPool
+        .getRepository(Document)
+        .insert(newDocument);
+      const newDocumentId = createdDocument.raw[0].id;
+
+      if (file) {
+        const newParagraphs = file.data.toString().split("\n");
+        newParagraphs.map((content, index) =>
+          paragraphService.createParagraph({
+            content,
+            name: `paragraph-${index}`,
+            document: newDocumentId,
+            serial: index,
+          }),
+        );
+      }
+
+      return newDocument;
     } catch (e) {
       throw new HttpExceprtion(e.message, 400);
     }
