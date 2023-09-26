@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import { authService } from "../services";
-import { errorHandler } from "../utils";
-import { authMiddleware } from "../middlewares";
+import { authService } from "../../services";
+import { errorHandler } from "../../utils";
+import { authMiddleware } from "../../middlewares";
 
 const userRouter = Router();
 

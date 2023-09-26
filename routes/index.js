@@ -1,2 +1,2 @@
-export * from "./user.routes";
-export * from "./document.routes";
+export * from "./user";
+export * from "./document";

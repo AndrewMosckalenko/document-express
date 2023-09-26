@@ -2,16 +2,19 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
+import swaggerUiExpress from "swagger-ui-express";
 
 import { userRouter, documentRouter } from "./routes";
 import { createPgPool } from "./db/postgres";
 import { authMiddleware } from "./middlewares";
+import { swaggerDocs } from "./api-doc";
 
 const app = express();
 const port = Number(process.env.BACKEND_PORT) || 5000;
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(cors());
+app.use("/doc", swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerDocs));
 
 app.use("/api/user", urlencodedParser, userRouter);
 app.use("/api/document", urlencodedParser, authMiddleware, documentRouter);
