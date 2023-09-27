@@ -41,7 +41,7 @@ export const documentService = {
       );
     }
 
-    return newDocument;
+    return createdDocument;
   },
 
   deleteDocument(id) {
